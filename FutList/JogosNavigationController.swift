@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  JogosNavigationController.swift
 //  FutList
 //
 //  Created by Mateus Nobre on 13/08/20.
@@ -8,13 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class JogosNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
-
 }
-
