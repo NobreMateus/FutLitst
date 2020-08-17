@@ -12,6 +12,8 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     let gamesSegmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["Próximos","Terminados"])
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(segment:)), for:.valueChanged)
         return segmentedControl
     }()
 
@@ -56,6 +58,15 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
         gamesTableView.topAnchor.constraint(equalTo: gamesSegmentedControl.bottomAnchor, constant: 16).isActive = true
         gamesTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     }
+
+    @objc
+    func segmentedControlValueChanged(segment: UISegmentedControl) {
+        if segment.selectedSegmentIndex == 0 {
+            print("0")
+        } else {
+            print("1")
+        }
+    }
 }
 
 extension JogosViewController {
@@ -68,7 +79,15 @@ extension JogosViewController {
 
         let gamesCell = GameInfoCell()
 
-        gamesCell.configureCell(player1Name: "Sao Paulo", player2Name: "Flamengo")
+        let gameInfo = GameInfo(
+            player1: "Sao Paulo",
+            player2: "Flamengo",
+            estadio: "Morumbi",
+            horario: Date(timeIntervalSince1970: 0),
+            placar: [0, 0]
+        )
+
+        gamesCell.configureCell(gameInfo: gameInfo)
 
         return gamesCell
     }
