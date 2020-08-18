@@ -10,6 +10,22 @@ import UIKit
 
 class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    let mockedFinishedGames: [GameInfo] = [
+        GameInfo(player1: "Sao Paulp", player2: "Flamego", estadio: "Morumbi", horario: Date(timeIntervalSince1970: 10), placar: [0, 0]),
+        GameInfo(player1: "Fortaleza", player2: "Ceara", estadio: "Morumbi", horario: Date(timeIntervalSince1970: 10), placar: [3, 3]),
+        GameInfo(player1: "Sao Paulp", player2: "Flamego", estadio: "Morumbi", horario: Date(timeIntervalSince1970: 10), placar: [2, 1]),
+        GameInfo(player1: "Sao Paulp", player2: "Flamego", estadio: "Morumbi", horario: Date(timeIntervalSince1970: 10), placar: [0, 3])
+    ]
+
+    let mockedNextGames: [GameInfo] = [
+        GameInfo(player1: "Botafogo", player2: "Flamego", estadio: "Morumbi", horario: Date(timeIntervalSince1970: 10), placar: nil),
+        GameInfo(player1: "Avai", player2: "Ceara", estadio: "Castelao", horario: Date(timeIntervalSince1970: 10), placar: nil),
+        GameInfo(player1: "Fluminense", player2: "Flamego", estadio: "Morumbi", horario: Date(timeIntervalSince1970: 1), placar: nil),
+        GameInfo(player1: "Gremio", player2: "Flamego", estadio: "Morumbi", horario: Date(timeIntervalSince1970: 10), placar: nil)
+    ]
+
+    var tableGames: [GameInfo] = []
+
     let gamesSegmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["Próximos","Terminados"])
         segmentedControl.selectedSegmentIndex = 0
@@ -29,6 +45,8 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
         title = "Jogos"
         navigationController?.navigationBar.prefersLargeTitles = true
 
+        tableGames = mockedFinishedGames
+
         addGamesSegmentedControl()
         addGamesTableView()
 
@@ -37,7 +55,6 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     func addGamesSegmentedControl() {
-
         view.addSubview(gamesSegmentedControl)
 
         let safeArea = view.safeAreaLayoutGuide
@@ -49,7 +66,6 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     func addGamesTableView() {
-
         view.addSubview(gamesTableView)
 
         gamesTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -62,9 +78,11 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @objc
     func segmentedControlValueChanged(segment: UISegmentedControl) {
         if segment.selectedSegmentIndex == 0 {
-            print("0")
+            tableGames = mockedFinishedGames
+            gamesTableView.reloadData()
         } else {
-            print("1")
+            tableGames = mockedNextGames
+            gamesTableView.reloadData()
         }
     }
 }
@@ -72,23 +90,13 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
 extension JogosViewController {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return tableGames.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let gamesCell = GameInfoCell()
-
-        let gameInfo = GameInfo(
-            player1: "Sao Paulo",
-            player2: "Flamengo",
-            estadio: "Morumbi",
-            horario: Date(timeIntervalSince1970: 0),
-            placar: [0, 0]
-        )
-
+        let gameInfo = tableGames[indexPath.row]
         gamesCell.configureCell(gameInfo: gameInfo)
-
         return gamesCell
     }
 
@@ -97,7 +105,7 @@ extension JogosViewController {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        1
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
