@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2710EBC424EAC775000CB17A /* GameInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2710EBC324EAC775000CB17A /* GameInfo.swift */; };
+		272CA24824ED48A000C784CA /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272CA24724ED48A000C784CA /* Team.swift */; };
+		272CA24A24ED4A6100C784CA /* TeamsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272CA24924ED4A6100C784CA /* TeamsRequest.swift */; };
 		273AD85324EABB2D003E3AB5 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 273AD85224EABB2D003E3AB5 /* .swiftlint.yml */; };
+		2747650A24ED6BED006388E8 /* SearchedTeamsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2747650924ED6BED006388E8 /* SearchedTeamsTableViewCell.swift */; };
 		27FCA47124E579DB000A4010 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCA47024E579DB000A4010 /* AppDelegate.swift */; };
 		27FCA47324E579DB000A4010 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCA47224E579DB000A4010 /* SceneDelegate.swift */; };
 		27FCA47524E579DB000A4010 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCA47424E579DB000A4010 /* TabBarViewController.swift */; };
@@ -42,7 +45,10 @@
 
 /* Begin PBXFileReference section */
 		2710EBC324EAC775000CB17A /* GameInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfo.swift; sourceTree = "<group>"; };
+		272CA24724ED48A000C784CA /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		272CA24924ED4A6100C784CA /* TeamsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsRequest.swift; sourceTree = "<group>"; };
 		273AD85224EABB2D003E3AB5 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		2747650924ED6BED006388E8 /* SearchedTeamsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedTeamsTableViewCell.swift; sourceTree = "<group>"; };
 		27FCA46D24E579DB000A4010 /* FutList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FutList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27FCA47024E579DB000A4010 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27FCA47224E579DB000A4010 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +131,9 @@
 				27FCA47B24E579DD000A4010 /* LaunchScreen.storyboard */,
 				27FCA47E24E579DD000A4010 /* Info.plist */,
 				2710EBC324EAC775000CB17A /* GameInfo.swift */,
+				272CA24724ED48A000C784CA /* Team.swift */,
+				272CA24924ED4A6100C784CA /* TeamsRequest.swift */,
+				2747650924ED6BED006388E8 /* SearchedTeamsTableViewCell.swift */,
 			);
 			path = FutList;
 			sourceTree = "<group>";
@@ -325,6 +334,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				27FCA47524E579DB000A4010 /* TabBarViewController.swift in Sources */,
+				272CA24824ED48A000C784CA /* Team.swift in Sources */,
+				2747650A24ED6BED006388E8 /* SearchedTeamsTableViewCell.swift in Sources */,
+				272CA24A24ED4A6100C784CA /* TeamsRequest.swift in Sources */,
 				27FCA4A124E57D93000A4010 /* JogosViewController.swift in Sources */,
 				2710EBC424EAC775000CB17A /* GameInfo.swift in Sources */,
 				27FCA4A724E58AD5000A4010 /* JogosNavigationController.swift in Sources */,
