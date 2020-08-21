@@ -20,6 +20,7 @@ class SearchedTeamsTableViewCell: UITableViewCell {
         fButton.layer.cornerRadius = 4
         return fButton
     }()
+    var onFollowButtonClick: (( Int ) -> Void)?
 
     override func awakeFromNib() {
 
@@ -31,11 +32,12 @@ class SearchedTeamsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    func configure(team: Team) {
+    func configure(team: Team, onFollowButtonClick: @escaping (Int) -> Void ) {
 
         addTeamImageView(imageURL: team.logo)
         addTeamLabel(name: team.name)
-        addFollowButton()
+        addFollowButton(teamId: team.team_id)
+        self.onFollowButtonClick = onFollowButtonClick
     }
 
     func addTeamLabel(name: String) {
@@ -60,7 +62,10 @@ class SearchedTeamsTableViewCell: UITableViewCell {
         teamImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
     }
 
-    func addFollowButton() {
+    func addFollowButton(teamId: Int) {
+
+        followButton.tag = teamId
+        followButton.addTarget(self, action: #selector(followButtonAction), for: .touchUpInside)
 
         self.addSubview(followButton)
 
@@ -68,6 +73,13 @@ class SearchedTeamsTableViewCell: UITableViewCell {
         followButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         followButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
         followButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
+    }
+
+    @objc
+    func followButtonAction(sender: UIButton) {
+
+        guard let followButtonClicked = self.onFollowButtonClick else {return}
+        followButtonClicked(sender.tag)
     }
 
 }

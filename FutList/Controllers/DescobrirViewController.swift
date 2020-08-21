@@ -10,6 +10,8 @@ import UIKit
 
 class DescobrirViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
+    let defaults = UserDefaults.standard
+
     let teamsTableView: UITableView = {
         let teamsTV = UITableView()
         return teamsTV
@@ -29,6 +31,7 @@ class DescobrirViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     override func viewDidLoad() {
+
         super.viewDidLoad()
 
         teamsTableView.dataSource = self
@@ -44,6 +47,18 @@ class DescobrirViewController: UIViewController, UITableViewDelegate, UITableVie
         addTeamsTableView()
         addGestureToDismissSearchBar()
 
+    }
+
+    func followTeam(teamId: Int) {
+
+        let teamsIds = defaults.object(forKey: "followedTeamsIdArray") as? [Int]
+
+        if var teamsIdsIntArray = teamsIds {
+            teamsIdsIntArray.append(teamId)
+            defaults.set(teamsIdsIntArray, forKey: "followedTeamsIdArray")
+        } else {
+            defaults.set([teamId], forKey: "followedTeamsIdArray")
+        }
     }
 
     func addTeamSearchBar() {
@@ -70,13 +85,14 @@ class DescobrirViewController: UIViewController, UITableViewDelegate, UITableVie
 }
 
 extension DescobrirViewController {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return teamsList.count
      }
 
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let teamTableViewCell = SearchedTeamsTableViewCell()
-        teamTableViewCell.configure(team: teamsList[indexPath.row])
+        teamTableViewCell.configure(team: teamsList[indexPath.row], onFollowButtonClick: followTeam)
 
         return teamTableViewCell
      }
