@@ -94,6 +94,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2781FEF024EFEBFB00099C3D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				27FCA4A024E57D93000A4010 /* JogosViewController.swift */,
+				27FCA47424E579DB000A4010 /* TabBarViewController.swift */,
+				27FCA4A624E58AD5000A4010 /* JogosNavigationController.swift */,
+				27FCA4A224E57DAA000A4010 /* SeguindoViewController.swift */,
+				27FCA4A424E57DBF000A4010 /* DescobrirViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		2781FEF124EFEC2D00099C3D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				27FCA4A824E6D5FE000A4010 /* GameInfoCell.swift */,
+				2747650924ED6BED006388E8 /* SearchedTeamsTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2781FEF224EFEC5900099C3D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2710EBC324EAC775000CB17A /* GameInfo.swift */,
+				272CA24724ED48A000C784CA /* Team.swift */,
+				272CA24924ED4A6100C784CA /* TeamsRequest.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		27FCA46424E579DB000A4010 = {
 			isa = PBXGroup;
 			children = (
@@ -118,22 +149,15 @@
 		27FCA46F24E579DB000A4010 /* FutList */ = {
 			isa = PBXGroup;
 			children = (
+				2781FEF024EFEBFB00099C3D /* Controllers */,
 				273AD85224EABB2D003E3AB5 /* .swiftlint.yml */,
 				27FCA47024E579DB000A4010 /* AppDelegate.swift */,
-				27FCA4A424E57DBF000A4010 /* DescobrirViewController.swift */,
 				27FCA47224E579DB000A4010 /* SceneDelegate.swift */,
-				27FCA4A024E57D93000A4010 /* JogosViewController.swift */,
-				27FCA4A224E57DAA000A4010 /* SeguindoViewController.swift */,
-				27FCA47424E579DB000A4010 /* TabBarViewController.swift */,
-				27FCA4A624E58AD5000A4010 /* JogosNavigationController.swift */,
-				27FCA4A824E6D5FE000A4010 /* GameInfoCell.swift */,
 				27FCA47924E579DD000A4010 /* Assets.xcassets */,
+				2781FEF124EFEC2D00099C3D /* Views */,
 				27FCA47B24E579DD000A4010 /* LaunchScreen.storyboard */,
 				27FCA47E24E579DD000A4010 /* Info.plist */,
-				2710EBC324EAC775000CB17A /* GameInfo.swift */,
-				272CA24724ED48A000C784CA /* Team.swift */,
-				272CA24924ED4A6100C784CA /* TeamsRequest.swift */,
-				2747650924ED6BED006388E8 /* SearchedTeamsTableViewCell.swift */,
+				2781FEF224EFEC5900099C3D /* Models */,
 			);
 			path = FutList;
 			sourceTree = "<group>";

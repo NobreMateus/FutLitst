@@ -18,24 +18,20 @@ class SearchedTeamsTableViewCell: UITableViewCell {
         fButton.backgroundColor = .blue
         fButton.titleLabel?.font = .systemFont(ofSize: 10)
         fButton.layer.cornerRadius = 4
-        //fButton.frame = CGRect(x: 0, y: 0, width: 100, height: 24)
         return fButton
     }()
 
     override func awakeFromNib() {
+
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        super.setSelected(selected, animated: animated)
     }
 
     func configure(team: Team) {
-
-        //self.heightAnchor.constraint(equalToConstant: 120).isActive = true
 
         addTeamImageView(imageURL: team.logo)
         addTeamLabel(name: team.name)
@@ -50,7 +46,6 @@ class SearchedTeamsTableViewCell: UITableViewCell {
         nameTeamLabel.translatesAutoresizingMaskIntoConstraints = false
         nameTeamLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         nameTeamLabel.leadingAnchor.constraint(equalTo: teamImageView.trailingAnchor, constant: 8).isActive = true
-
     }
 
     func addTeamImageView(imageURL: String) {
@@ -73,7 +68,6 @@ class SearchedTeamsTableViewCell: UITableViewCell {
         followButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         followButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
         followButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
-
     }
 
 }

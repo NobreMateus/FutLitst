@@ -10,36 +10,46 @@ import UIKit
 
 class GameInfoCell: UITableViewCell {
 
+    let teamsNameView = UIView()
+    let teamsSeparator = UILabel()
+    let player1Label = UILabel()
+    let player2Label = UILabel()
+    let placar1Label = UILabel()
+    let placar2Label = UILabel()
+    let estadioLabel = UILabel()
+    let horarioLabel = UILabel()
+
     override func awakeFromNib() {
+
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
 
+        super.setSelected(selected, animated: animated)
     }
 
     func configureCell(gameInfo: GameInfo) {
-        let player1Label = UILabel()
-        player1Label.text = gameInfo.player1
 
-        let player2Label = UILabel()
-        player2Label.text = gameInfo.player2
+        addTeamsAndSeparator(player1Name: gameInfo.player1, player2Name: gameInfo.player2)
 
-        let teamsSeparator = UILabel()
+        if let placar = gameInfo.placar {
+            addPlacar(placar1: String(placar[0]), placar2: String(placar[1]))
+        }
+
+        addMoreInfoGame(estadio: gameInfo.estadio, horario: "12:00" , yReferenceView: teamsSeparator)
+    }
+
+    func addTeamsAndSeparator(player1Name: String, player2Name: String) {
+
+        player1Label.text = player1Name
+        player2Label.text = player2Name
         teamsSeparator.text = "X"
-
-        let teamsNameView = UIView()
 
         teamsNameView.addSubview(player1Label)
         teamsNameView.addSubview(player2Label)
         teamsNameView.addSubview(teamsSeparator)
         self.addSubview(teamsNameView)
-
-        if let placar = gameInfo.placar {
-            addPlacar(placar1: String(placar[0]), placar2: String(placar[1]), teamsNameView: teamsNameView)
-        }
 
         player1Label.translatesAutoresizingMaskIntoConstraints = false
         player1Label.trailingAnchor.constraint(equalTo: self.centerXAnchor, constant: -60).isActive = true
@@ -58,16 +68,11 @@ class GameInfoCell: UITableViewCell {
         teamsNameView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
         teamsNameView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8).isActive = true
         teamsNameView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8).isActive = true
-
-        addMoreInfoGame(estadio: gameInfo.estadio, horario: "12:00" , teamsNameView: teamsNameView, yReferenceView: teamsSeparator)
     }
 
-    func addPlacar(placar1: String, placar2:String, teamsNameView: UIView) {
+    func addPlacar(placar1: String, placar2:String) {
 
-        let placar1Label = UILabel()
         placar1Label.text = placar1
-
-        let placar2Label = UILabel()
         placar2Label.text = placar2
 
         teamsNameView.addSubview(placar1Label)
@@ -81,13 +86,11 @@ class GameInfoCell: UITableViewCell {
         placar2Label.leadingAnchor.constraint(equalTo: teamsNameView.centerXAnchor, constant: 24).isActive = true
     }
 
-    func addMoreInfoGame(estadio: String, horario: String, teamsNameView: UIView, yReferenceView: UIView) {
+    func addMoreInfoGame(estadio: String, horario: String, yReferenceView: UIView) {
 
-        let estadioLabel = UILabel()
         estadioLabel.text = estadio
         estadioLabel.font = estadioLabel.font.withSize(12)
 
-        let horarioLabel = UILabel()
         horarioLabel.text = horario
         horarioLabel.font = horarioLabel.font.withSize(16)
 
