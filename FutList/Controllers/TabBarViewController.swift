@@ -16,7 +16,7 @@ class TabBarViewController: UITabBarController {
         navigationController?.navigationItem.largeTitleDisplayMode = .always
 
         let seguindoViewController = SeguindoViewController()
-        let jogosViewController =  JogosNavigationController(rootViewController: JogosViewController())
+        let jogosViewController =  UINavigationController(rootViewController: JogosViewController())
         let descobrirViewController = DescobrirViewController()
 
         seguindoViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 0)

@@ -22,7 +22,6 @@
 		27FCA4A124E57D93000A4010 /* JogosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCA4A024E57D93000A4010 /* JogosViewController.swift */; };
 		27FCA4A324E57DAA000A4010 /* SeguindoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCA4A224E57DAA000A4010 /* SeguindoViewController.swift */; };
 		27FCA4A524E57DBF000A4010 /* DescobrirViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCA4A424E57DBF000A4010 /* DescobrirViewController.swift */; };
-		27FCA4A724E58AD5000A4010 /* JogosNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCA4A624E58AD5000A4010 /* JogosNavigationController.swift */; };
 		27FCA4A924E6D5FE000A4010 /* GameInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCA4A824E6D5FE000A4010 /* GameInfoCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,7 +64,6 @@
 		27FCA4A024E57D93000A4010 /* JogosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JogosViewController.swift; sourceTree = "<group>"; };
 		27FCA4A224E57DAA000A4010 /* SeguindoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeguindoViewController.swift; sourceTree = "<group>"; };
 		27FCA4A424E57DBF000A4010 /* DescobrirViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescobrirViewController.swift; sourceTree = "<group>"; };
-		27FCA4A624E58AD5000A4010 /* JogosNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JogosNavigationController.swift; sourceTree = "<group>"; };
 		27FCA4A824E6D5FE000A4010 /* GameInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,7 +97,6 @@
 			children = (
 				27FCA4A024E57D93000A4010 /* JogosViewController.swift */,
 				27FCA47424E579DB000A4010 /* TabBarViewController.swift */,
-				27FCA4A624E58AD5000A4010 /* JogosNavigationController.swift */,
 				27FCA4A224E57DAA000A4010 /* SeguindoViewController.swift */,
 				27FCA4A424E57DBF000A4010 /* DescobrirViewController.swift */,
 			);
@@ -363,7 +360,6 @@
 				272CA24A24ED4A6100C784CA /* TeamsRequest.swift in Sources */,
 				27FCA4A124E57D93000A4010 /* JogosViewController.swift in Sources */,
 				2710EBC424EAC775000CB17A /* GameInfo.swift in Sources */,
-				27FCA4A724E58AD5000A4010 /* JogosNavigationController.swift in Sources */,
 				27FCA4A924E6D5FE000A4010 /* GameInfoCell.swift in Sources */,
 				27FCA4A524E57DBF000A4010 /* DescobrirViewController.swift in Sources */,
 				27FCA4A324E57DAA000A4010 /* SeguindoViewController.swift in Sources */,

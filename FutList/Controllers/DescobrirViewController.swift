@@ -42,6 +42,7 @@ class DescobrirViewController: UIViewController, UITableViewDelegate, UITableVie
 
         addTeamSearchBar()
         addTeamsTableView()
+        addGestureToDismissSearchBar()
 
     }
 
@@ -90,6 +91,8 @@ extension DescobrirViewController {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 
+        searchBar.endEditing(true)
+
         guard let searchBarText = searchBar.text else { return }
         let teamsRequest = TeamsRequest(textSearch: searchBarText )
 
@@ -101,6 +104,16 @@ extension DescobrirViewController {
                 self?.teamsList = teams
             }
         }
+    }
+
+    func addGestureToDismissSearchBar() {
+        let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissSearchBar))
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc
+    func dismissSearchBar() {
+        searchTeamBar.endEditing(true)
     }
 
 }
