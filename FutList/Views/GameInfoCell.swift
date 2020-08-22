@@ -29,15 +29,16 @@ class GameInfoCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    func configureCell(gameInfo: GameInfo) {
+    func configureCell(gameInfo: Match) {
 
-        addTeamsAndSeparator(player1Name: gameInfo.player1, player2Name: gameInfo.player2)
+        addTeamsAndSeparator(player1Name: gameInfo.homeTeam.team_name, player2Name: gameInfo.awayTeam.team_name)
 
-        if let placar = gameInfo.placar {
-            addPlacar(placar1: String(placar[0]), placar2: String(placar[1]))
+        if let homeGoals = gameInfo.goalsHomeTeam, let awayGoals = gameInfo.goalsAwayTeam {
+            addPlacar(placar1: String(homeGoals), placar2: String(awayGoals))
         }
 
-        addMoreInfoGame(estadio: gameInfo.estadio, horario: "12:00" , yReferenceView: teamsSeparator)
+        //addMoreInfoGame(estadio: gameInfo.venue, horario: gameInfo.event_date, yReferenceView: teamsSeparator)
+
     }
 
     func addTeamsAndSeparator(player1Name: String, player2Name: String) {
@@ -52,7 +53,7 @@ class GameInfoCell: UITableViewCell {
         self.addSubview(teamsNameView)
 
         player1Label.translatesAutoresizingMaskIntoConstraints = false
-        player1Label.trailingAnchor.constraint(equalTo: self.centerXAnchor, constant: -60).isActive = true
+        player1Label.trailingAnchor.constraint(equalTo: self.centerXAnchor, constant: -60).isActive = true // Erro de constraint
         player1Label.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
 
         player2Label.translatesAutoresizingMaskIntoConstraints = false
@@ -86,23 +87,25 @@ class GameInfoCell: UITableViewCell {
         placar2Label.leadingAnchor.constraint(equalTo: teamsNameView.centerXAnchor, constant: 24).isActive = true
     }
 
-    func addMoreInfoGame(estadio: String, horario: String, yReferenceView: UIView) {
-
-        estadioLabel.text = estadio
-        estadioLabel.font = estadioLabel.font.withSize(12)
+    func addMoreInfoGame(estadio: String?, horario: String, yReferenceView: UIView) {
 
         horarioLabel.text = horario
         horarioLabel.font = horarioLabel.font.withSize(16)
-
-        teamsNameView.addSubview(estadioLabel)
-        estadioLabel.translatesAutoresizingMaskIntoConstraints = false
-        estadioLabel.topAnchor.constraint(equalTo: yReferenceView.bottomAnchor, constant: 8).isActive = true
-        estadioLabel.centerXAnchor.constraint(equalTo: teamsNameView.centerXAnchor).isActive = true
 
         teamsNameView.addSubview(horarioLabel)
         horarioLabel.translatesAutoresizingMaskIntoConstraints = false
         horarioLabel.topAnchor.constraint(equalTo: estadioLabel.bottomAnchor, constant: 0).isActive = true
         horarioLabel.centerXAnchor.constraint(equalTo: teamsNameView.centerXAnchor).isActive = true
+
+        if let estadioValue = estadio {
+            estadioLabel.text = estadioValue
+            estadioLabel.font = estadioLabel.font.withSize(12)
+
+            teamsNameView.addSubview(estadioLabel)
+            estadioLabel.translatesAutoresizingMaskIntoConstraints = false
+            estadioLabel.topAnchor.constraint(equalTo: yReferenceView.bottomAnchor, constant: 8).isActive = true
+            estadioLabel.centerXAnchor.constraint(equalTo: teamsNameView.centerXAnchor).isActive = true
+        }
     }
 
 }

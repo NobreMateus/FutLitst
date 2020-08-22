@@ -10,21 +10,23 @@ import UIKit
 
 class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    let mockedFinishedGames: [GameInfo] = [
-        GameInfo(player1: "Sao Paulp", player2: "Flamego", estadio: "Morumbi", horario: Date(timeIntervalSince1970: 10), placar: [0, 0]),
-        GameInfo(player1: "Fortaleza", player2: "Ceara", estadio: "Morumbi", horario: Date(timeIntervalSince1970: 10), placar: [3, 3]),
-        GameInfo(player1: "Sao Paulp", player2: "Flamego", estadio: "Morumbi", horario: Date(timeIntervalSince1970: 10), placar: [2, 1]),
-        GameInfo(player1: "Sao Paulp", player2: "Flamego", estadio: "Morumbi", horario: Date(timeIntervalSince1970: 10), placar: [0, 3])
-    ]
-
-    let mockedNextGames: [GameInfo] = [
-        GameInfo(player1: "Botafogo", player2: "Flamego", estadio: "Morumbi", horario: Date(timeIntervalSince1970: 10), placar: nil),
-        GameInfo(player1: "Avai", player2: "Ceara", estadio: "Castelao", horario: Date(timeIntervalSince1970: 10), placar: nil),
-        GameInfo(player1: "Fluminense", player2: "Flamego", estadio: "Morumbi", horario: Date(timeIntervalSince1970: 1), placar: nil),
-        GameInfo(player1: "Gremio", player2: "Flamego", estadio: "Morumbi", horario: Date(timeIntervalSince1970: 10), placar: nil)
-    ]
-
-    var tableGames: [GameInfo] = []
+    var tableGames: [Match] = []
+    var finishedGames: [Match] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableGames = self.finishedGames
+                self.gamesTableView.reloadData()
+            }
+        }
+    }
+    var nextGames: [Match] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableGames = self.nextGames
+                self.gamesTableView.reloadData()
+            }
+        }
+    }
 
     let gamesSegmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["Próximos","Terminados"])
@@ -41,29 +43,31 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let matchsRequest = MatchRequest(leagueId: 1396)
-        matchsRequest.getMatchsFromLeague { [weak self] result in
-            switch result {
-            case .failure(let error):
-                print(error)
-            case .success(let matchs):
-                //self?.teamsList = teams
-                //self?.teams
-                print(matchs)
-            }
-        }
-
         view.backgroundColor = .white
         title = "Jogos"
         navigationController?.navigationBar.prefersLargeTitles = true
 
-        tableGames = mockedFinishedGames
-
+        getMatches()
+        
         addGamesSegmentedControl()
         addGamesTableView()
 
         gamesTableView.delegate = self
         gamesTableView.dataSource = self
+    }
+
+    func getMatches() {
+        let matchsRequest = MatchRequest(leagueId: 1396)
+        matchsRequest.getMatchsFromLeague { [weak self] result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let matches):
+                self?.nextGames = matches
+                self?.finishedGames = matches
+            }
+        }
+
     }
 
     func addGamesSegmentedControl() {
@@ -90,10 +94,10 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @objc
     func segmentedControlValueChanged(segment: UISegmentedControl) {
         if segment.selectedSegmentIndex == 0 {
-            tableGames = mockedFinishedGames
+            tableGames = finishedGames
             gamesTableView.reloadData()
         } else {
-            tableGames = mockedNextGames
+            tableGames = nextGames
             gamesTableView.reloadData()
         }
     }
