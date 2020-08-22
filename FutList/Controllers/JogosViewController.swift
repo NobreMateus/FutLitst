@@ -41,6 +41,18 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let matchsRequest = MatchRequest(leagueId: 1396)
+        matchsRequest.getMatchsFromLeague { [weak self] result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let matchs):
+                //self?.teamsList = teams
+                //self?.teams
+                print(matchs)
+            }
+        }
+
         view.backgroundColor = .white
         title = "Jogos"
         navigationController?.navigationBar.prefersLargeTitles = true
