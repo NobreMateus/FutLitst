@@ -19,7 +19,7 @@ struct Match: Decodable {
     let fixture_id: Int
     let league_id: Int
     let event_date: String
-    let status: String
+    let statusShort: String
     let elapsed: Int
     let venue: String?
     let referee: String?

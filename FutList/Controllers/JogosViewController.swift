@@ -10,16 +10,16 @@ import UIKit
 
 class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var tableGames: [Match] = []
-    var finishedGames: [Match] = [] {
+    var tableGames: ([String:[Match]], [String]) = ([:], [])
+    var finishedGames: ([String:[Match]], [String]) = ([:], []) {
         didSet {
             DispatchQueue.main.async {
-                self.tableGames = self.finishedGames
-                self.gamesTableView.reloadData()
+//                self.tableGames = self.finishedGames
+//                self.gamesTableView.reloadData()
             }
         }
     }
-    var nextGames: [Match] = [] {
+    var nextGames: ([String:[Match]], [String]) = ([:], []) {
         didSet {
             DispatchQueue.main.async {
                 self.tableGames = self.nextGames
@@ -40,6 +40,8 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return gamesTv
     }()
 
+    let filterMatches = FilterService()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,7 +50,7 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
         navigationController?.navigationBar.prefersLargeTitles = true
 
         getMatches()
-        
+
         addGamesSegmentedControl()
         addGamesTableView()
 
@@ -63,11 +65,17 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
             case .failure(let error):
                 print(error)
             case .success(let matches):
-                self?.nextGames = matches
-                self?.finishedGames = matches
+
+                guard let finishedGamesTemp = self?.filterMatches.filterFinishedGames(matches: matches) else {return}
+                guard let nextGamesTemp = self?.filterMatches.filterNextGames(matches: matches) else {return}
+
+                guard let nextGamesTuple = self?.filterMatches.separateMatchesByDate(matches: nextGamesTemp) else {return}
+                guard let finishedGamesTuple = self?.filterMatches.separateMatchesByDate(matches: finishedGamesTemp) else {return}
+
+                self?.nextGames = nextGamesTuple
+                self?.finishedGames = finishedGamesTuple
             }
         }
-
     }
 
     func addGamesSegmentedControl() {
@@ -94,10 +102,10 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @objc
     func segmentedControlValueChanged(segment: UISegmentedControl) {
         if segment.selectedSegmentIndex == 0 {
-            tableGames = finishedGames
+            tableGames = nextGames
             gamesTableView.reloadData()
         } else {
-            tableGames = nextGames
+            tableGames = finishedGames
             gamesTableView.reloadData()
         }
     }
@@ -106,12 +114,14 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
 extension JogosViewController {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableGames.count
+        guard let gameInfo = tableGames.0[tableGames.1[section]] else {return 0}
+        return gameInfo.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let gamesCell = GameInfoCell()
-        let gameInfo = tableGames[indexPath.row]
+
+        guard let gameInfo = tableGames.0[tableGames.1[indexPath.section]]?[indexPath.row] else {return gamesCell}
         gamesCell.configureCell(gameInfo: gameInfo)
         return gamesCell
     }
@@ -121,11 +131,11 @@ extension JogosViewController {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        return tableGames.1.count
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "14/08/2020 - Sexta-feira"
+        return tableGames.1[section]
     }
 
 }
