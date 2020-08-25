@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct PersistenceService {
+struct TeamPersistence {
 
     let defaults = UserDefaults.standard
 

@@ -5,7 +5,7 @@
 //  Created by Mateus Nobre on 23/08/20.
 //  Copyright © 2020 Mateus Nobre. All rights reserved.
 //
-// swiftlint:disable trailing_whitespace line_length
+// swiftlint:disable trailing_whitespace line_length identifier_name
 
 @testable import FutList
 import XCTest
@@ -23,50 +23,58 @@ class FilterServiceTests: XCTestCase {
         super.setUp()
         filter = FilterService()
         allGames = [
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "TBD", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "NS", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "2020-08-08T22:30:00+00:00", statusShort: "1H", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "2020-08-08T22:30:00+00:00", statusShort: "HT", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "2020-08-09T00:00:00+00:00", statusShort: "2H", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "2020-08-09T00:00:00+00:00", statusShort: "ET", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "2020-08-09T00:00:00+00:00", statusShort: "P", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "FT", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "AET", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "PEN", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "BT", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "SUSP", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "INT", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "PST", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "CANC", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "ABD", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "AWD", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "WO", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil)
+            putStatusOnMatch(statusShort: "TBD"),
+            putStatusOnMatch(statusShort: "NS"),
+            putStatusOnMatch(statusShort: "1H"),
+            putStatusOnMatch(statusShort: "HT"),
+            putStatusOnMatch(statusShort: "2H"),
+            putStatusOnMatch(statusShort: "ET"),
+            putStatusOnMatch(statusShort: "P"),
+            putStatusOnMatch(statusShort: "FT"),
+            putStatusOnMatch(statusShort: "AET"),
+            putStatusOnMatch(statusShort: "PEN"),
+            putStatusOnMatch(statusShort: "BT"),
+            putStatusOnMatch(statusShort: "SUSP"),
+            putStatusOnMatch(statusShort: "INT"),
+            putStatusOnMatch(statusShort: "PST"),
+            putStatusOnMatch(statusShort: "CANC"),
+            putStatusOnMatch(statusShort: "ABD"),
+            putStatusOnMatch(statusShort: "AWD"),
+            putStatusOnMatch(statusShort: "WO")
         ]
         
         filteredNextGames = [
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "TBD", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "NS", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "SUSP", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-            Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "PST", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil)
+            putStatusOnMatch(statusShort: "TBD"),
+            putStatusOnMatch(statusShort: "NS"),
+            putStatusOnMatch(statusShort: "SUSP"),
+            putStatusOnMatch(statusShort: "PST")
         ]
         
         filteredCompletedAndCurrentGames = [
-           Match(fixture_id: 1, league_id: 1, event_date: "2020-08-08T22:30:00+00:00", statusShort: "1H", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-           Match(fixture_id: 1, league_id: 1, event_date: "2020-08-08T22:30:00+00:00", statusShort: "HT", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-           Match(fixture_id: 1, league_id: 1, event_date: "2020-08-09T00:00:00+00:00", statusShort: "2H", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-           Match(fixture_id: 1, league_id: 1, event_date: "2020-08-09T00:00:00+00:00", statusShort: "ET", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-           Match(fixture_id: 1, league_id: 1, event_date: "2020-08-09T00:00:00+00:00", statusShort: "P", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-           Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "FT", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-           Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "AET", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-           Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "PEN", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-           Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "BT", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-           Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "INT", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-           Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "ABD", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-           Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "AWD", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil),
-           Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "WO", elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil)
+           putStatusOnMatchAndDate(event_date: "2020-08-08T22:30:00+00:00", statusShort: "1H"),
+           putStatusOnMatchAndDate(event_date: "2020-08-08T22:30:00+00:00", statusShort: "HT"),
+           putStatusOnMatchAndDate(event_date: "2020-08-09T00:00:00+00:00", statusShort: "2H"),
+           putStatusOnMatchAndDate(event_date: "2020-08-09T00:00:00+00:00", statusShort: "ET"),
+           putStatusOnMatchAndDate(event_date: "2020-08-09T00:00:00+00:00", statusShort: "P"),
+           putStatusOnMatch(statusShort: "FT"),
+           putStatusOnMatch(statusShort: "AET"),
+           putStatusOnMatch(statusShort: "PEN"),
+           putStatusOnMatch(statusShort: "BT"),
+           putStatusOnMatch(statusShort: "INT"),
+           putStatusOnMatch(statusShort: "ABD"),
+           putStatusOnMatch(statusShort: "AWD"),
+           putStatusOnMatch(statusShort: "WO")
         ]
     }
-
+    
+    func putStatusOnMatch(statusShort: String) -> Match {
+        return Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: statusShort, elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil)
+    }
+    
+    func putStatusOnMatchAndDate(event_date: String, statusShort: String) -> Match {
+        return Match(fixture_id: 1, league_id: 1, event_date: event_date, statusShort: statusShort, elapsed: 1, venue: nil, referee: nil, homeTeam: matchHomeTeam, awayTeam: matchAwayTeam, goalsHomeTeam: nil, goalsAwayTeam: nil)
+    }
+    
     override func tearDown() {
         filter = nil
         super.tearDown()
@@ -92,16 +100,5 @@ class FilterServiceTests: XCTestCase {
         XCTAssertTrue(separatedMatchesByDateTuple.0["08-08-2020"]?.count == 2)
         XCTAssertTrue(separatedMatchesByDateTuple.0["09-08-2020"]?.count == 3)
     }
-//    func testExample() throws {
-//        // This is an example of a functional test case.
-//        // Use XCTAssert and related functions to verify your tests produce the correct results.
-//    }
-
-//    func testPerformanceExample() throws {
-//        // This is an example of a performance test case.
-//        self.measure {
-//            // Put the code you want to measure the time of here.
-//        }
-//    }
 
 }

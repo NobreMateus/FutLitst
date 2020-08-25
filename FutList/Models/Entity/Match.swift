@@ -9,13 +9,14 @@
 
 import Foundation
 
-struct MatchTeam: Decodable {
+struct MatchTeam: Decodable, Equatable {
     let team_id: Int
     let team_name: String
     let logo: String
 }
 
-struct Match: Decodable {
+struct Match: Decodable, Equatable {
+
     let fixture_id: Int
     let league_id: Int
     let event_date: String

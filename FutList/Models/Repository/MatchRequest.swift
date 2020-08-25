@@ -51,3 +51,10 @@ struct MatchRequest {
     }
 
 }
+
+/*
+        1 - Cria uma URL Request (Aqui q eu digo o tipo de requisicao, passo body, passo header, o metodo e etc)
+        2 - Cria uma URL Session (Normalmente usa-se as configuracoes de Shared como default)
+        3 - Configura uma Data Task (Configura o data task para saber oq fazer com os dados apos a requisicao)
+        4 - Chama o metodo .resumo (Faz a requisicao de fato e, apos isso, executa o completion passado para data task.
+ */

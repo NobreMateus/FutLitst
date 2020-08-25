@@ -13,17 +13,22 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var tableGames: ([String:[Match]], [String]) = ([:], [])
     var finishedGames: ([String:[Match]], [String]) = ([:], []) {
         didSet {
-            DispatchQueue.main.async {
-//                self.tableGames = self.finishedGames
-//                self.gamesTableView.reloadData()
+            if(gamesSegmentedControl.selectedSegmentIndex == 1) {
+                self.tableGames = self.nextGames
+                DispatchQueue.main.async {
+                    self.gamesTableView.reloadData()
+                }
             }
         }
     }
+
     var nextGames: ([String:[Match]], [String]) = ([:], []) {
         didSet {
-            DispatchQueue.main.async {
+            if(gamesSegmentedControl.selectedSegmentIndex == 0) {
                 self.tableGames = self.nextGames
-                self.gamesTableView.reloadData()
+                DispatchQueue.main.async {
+                    self.gamesTableView.reloadData()
+                }
             }
         }
     }
@@ -39,6 +44,8 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let gamesTv = UITableView()
         return gamesTv
     }()
+
+    let jogosView = JogosView()
 
     let filterMatches = FilterService()
 
