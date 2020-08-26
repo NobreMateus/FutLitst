@@ -13,7 +13,6 @@ class JogosView: UIView {
     var setSelectedSegment: (Int) -> Void = { _ in }
 
     func render() {
-        print("Ola Amigos")
         addGamesSegmentedControl()
         addGamesTableView()
         self.backgroundColor = .white

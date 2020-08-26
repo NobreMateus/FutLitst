@@ -10,8 +10,6 @@ import UIKit
 
 class DescobrirViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
-    let defaults = UserDefaults.standard
-
     var teamsList: [Team] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -50,14 +48,8 @@ class DescobrirViewController: UIViewController, UITableViewDelegate, UITableVie
 
     func followTeam(teamId: Int) {
 
-        let teamsIds = defaults.object(forKey: "followedTeamsIdArray") as? [Int]
-
-        if var teamsIdsIntArray = teamsIds {
-            teamsIdsIntArray.append(teamId)
-            defaults.set(teamsIdsIntArray, forKey: "followedTeamsIdArray")
-        } else {
-            defaults.set([teamId], forKey: "followedTeamsIdArray")
-        }
+        let teamPersistence = TeamPersistence()
+        teamPersistence.saveFollowedTeam(teamId: teamId)
     }
 
 }

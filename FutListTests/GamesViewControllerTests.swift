@@ -4,7 +4,6 @@
 //
 //  Created by Mateus Nobre on 24/08/20.
 //  Copyright © 2020 Mateus Nobre. All rights reserved.
-//swiftlint:disable line_length
 
 @testable import FutList
 import XCTest

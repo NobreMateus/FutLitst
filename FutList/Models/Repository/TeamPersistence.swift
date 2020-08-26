@@ -23,4 +23,14 @@ struct TeamPersistence {
             defaults.set([teamId], forKey: "followedTeamsIdArray")
         }
     }
+
+    func getFollowedTeams() -> [Int] {
+        let teamsIds = defaults.object(forKey: "followedTeamsIdArray") as? [Int]
+
+        if let teamsIdsIntArray = teamsIds {
+           return teamsIdsIntArray
+        } else {
+            return []
+        }
+    }
 }
