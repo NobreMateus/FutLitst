@@ -12,39 +12,38 @@ class DescobrirViewController: UIViewController, UITableViewDelegate, UITableVie
 
     let defaults = UserDefaults.standard
 
-    let teamsTableView: UITableView = {
-        let teamsTV = UITableView()
-        return teamsTV
-    }()
-
-    let searchTeamBar: UISearchBar = {
-        let teamBarSearch = UISearchBar()
-        return teamBarSearch
-    }()
-
     var teamsList: [Team] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.teamsTableView.reloadData()
+                self.descobrirView.teamsTableView.reloadData()
             }
         }
+    }
+
+    var descobrirView: DescobrirView {
+        guard let descobrirV = view as? DescobrirView else { return DescobrirView() }
+        return descobrirV
+    }
+
+    override func loadView() {
+        let descobrirView = DescobrirView()
+        view = descobrirView
     }
 
     override func viewDidLoad() {
 
         super.viewDidLoad()
 
-        teamsTableView.dataSource = self
-        teamsTableView.delegate = self
-
-        searchTeamBar.delegate = self
-
-        view.backgroundColor = .white
         title = "Jogos"
         navigationController?.navigationBar.prefersLargeTitles = true
 
-        addTeamSearchBar()
-        addTeamsTableView()
+        descobrirView.render()
+
+        descobrirView.teamsTableView.dataSource = self
+        descobrirView.teamsTableView.delegate = self
+
+        descobrirView.searchTeamBar.delegate = self
+
         addGestureToDismissSearchBar()
 
     }
@@ -59,27 +58,6 @@ class DescobrirViewController: UIViewController, UITableViewDelegate, UITableVie
         } else {
             defaults.set([teamId], forKey: "followedTeamsIdArray")
         }
-    }
-
-    func addTeamSearchBar() {
-
-        view.addSubview(searchTeamBar)
-
-        searchTeamBar.translatesAutoresizingMaskIntoConstraints = false
-        searchTeamBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        searchTeamBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        searchTeamBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-    }
-
-    func addTeamsTableView() {
-
-        view.addSubview(teamsTableView)
-
-        teamsTableView.translatesAutoresizingMaskIntoConstraints = false
-        teamsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        teamsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        teamsTableView.topAnchor.constraint(equalTo: searchTeamBar.bottomAnchor, constant: 8).isActive = true
-        teamsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 
 }
@@ -124,12 +102,12 @@ extension DescobrirViewController {
 
     func addGestureToDismissSearchBar() {
         let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissSearchBar))
-        view.addGestureRecognizer(tap)
+        descobrirView.addGestureRecognizer(tap)
     }
 
     @objc
     func dismissSearchBar() {
-        searchTeamBar.endEditing(true)
+        descobrirView.searchTeamBar.endEditing(true)
     }
 
 }

@@ -37,14 +37,14 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     let filterMatches = FilterService()
 
-    override func loadView() {
-        let jogosView = JogosView()
-        view = jogosView
-    }
-
     var jogosView: JogosView {
         guard let jogosV = view as? JogosView else { return JogosView() }
         return jogosV
+    }
+
+    override func loadView() {
+        let jogosView = JogosView()
+        view = jogosView
     }
 
     override func viewDidLoad() {

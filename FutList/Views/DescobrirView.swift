@@ -10,12 +10,41 @@ import UIKit
 
 class DescobrirView: UIView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    let teamsTableView: UITableView = {
+        let teamsTV = UITableView()
+        return teamsTV
+    }()
+
+    let searchTeamBar: UISearchBar = {
+        let teamBarSearch = UISearchBar()
+        return teamBarSearch
+    }()
+
+    func render() {
+        self.backgroundColor = .white
+        addTeamSearchBar()
+        addTeamsTableView()
     }
-    */
+
+    func addTeamSearchBar() {
+
+        self.addSubview(searchTeamBar)
+
+        searchTeamBar.translatesAutoresizingMaskIntoConstraints = false
+        searchTeamBar.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        searchTeamBar.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        searchTeamBar.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
+    }
+
+    func addTeamsTableView() {
+
+        self.addSubview(teamsTableView)
+
+        teamsTableView.translatesAutoresizingMaskIntoConstraints = false
+        teamsTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        teamsTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        teamsTableView.topAnchor.constraint(equalTo: searchTeamBar.bottomAnchor, constant: 8).isActive = true
+        teamsTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
 
 }
