@@ -93,7 +93,6 @@ struct FilterService {
 
             if let matchDate = inputDateFormatter.date(from:match.event_date) {
                 let matchDateString = outputDateFormatter.string(from: matchDate)
-                print(matchDateString)
                 if var tempArray = matchesByDate[matchDateString] {
                     tempArray.append(match)
                     matchesByDate[matchDateString] = tempArray

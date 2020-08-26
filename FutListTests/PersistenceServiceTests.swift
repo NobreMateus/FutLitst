@@ -12,7 +12,7 @@ import XCTest
 class PersistenceServiceTests: XCTestCase {
 
     let defaults = UserDefaults.standard
-    let persistenceService = PersistenceService()
+    let persistenceService = TeamPersistence()
     let newTeamId = -10
 
     func test_saving_new_team_id() {

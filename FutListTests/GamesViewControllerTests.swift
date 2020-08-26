@@ -12,8 +12,11 @@ import XCTest
 class GamesViewControllerTests: XCTestCase {
 
     let jogosViewController = JogosViewController()
+    let mockedMatches = MockedMatches()
 
-    override func setUpWithError() throws {
+    override func setUp() {
+
+        //jogosViewController.tableGames = (mockedMatches.matchesDictionary, mockedMatches.keys)
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
@@ -21,21 +24,83 @@ class GamesViewControllerTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func test_computed_properties() {
+    func test_computed_properties_finished_matches() {
 
-        let matchTeam = MatchTeam(team_id: 1, team_name: "", logo: "")
-        let match = Match(fixture_id: 1, league_id: 1, event_date: "", statusShort: "", elapsed: 1, venue: nil, referee: nil, homeTeam: matchTeam, awayTeam: matchTeam, goalsHomeTeam: nil, goalsAwayTeam: nil)
+        jogosViewController.tableGames = ([:], [])
 
         XCTAssertTrue(jogosViewController.finishedGames.1 == [] )
         XCTAssertTrue(jogosViewController.tableGames.1 == [] )
 
-        jogosViewController.finishedGames = (["01-01-2020": [match, match]], ["01-01-2020", "01-01-2020"])
-        jogosViewController.nextGames = (["01-01-2020": [match, match]], ["01-01-2020", "01-01-2020"])
+        jogosViewController.finishedGames = (mockedMatches.finishedMatches, mockedMatches.keys)
+        jogosViewController.nextGames = (mockedMatches.finishedMatches, mockedMatches.keys)
 
-        XCTAssertTrue(jogosViewController.gamesSegmentedControl.selectedSegmentIndex == 0)
-        XCTAssertTrue(jogosViewController.tableGames.1 == ["01-01-2020", "01-01-2020"])
-        XCTAssertTrue(jogosViewController.tableGames.0["01-01-2020"]?.count == 2)
+        XCTAssertTrue(jogosViewController.selectedSegmented == 0)
+        XCTAssertTrue(jogosViewController.tableGames.1 == mockedMatches.keys)
+        XCTAssertTrue(jogosViewController.tableGames.0[mockedMatches.keys[0]]?.count == 7)
+        XCTAssertTrue(jogosViewController.tableGames.0[mockedMatches.keys[1]]?.count == 5)
 
+    }
+
+    func test_computed_properties_next_matches() {
+        jogosViewController.tableGames = ([:], [])
+        jogosViewController.selectedSegmented = 1
+
+        XCTAssertTrue(jogosViewController.nextGames.1 == [] )
+        XCTAssertTrue(jogosViewController.tableGames.1 == [] )
+
+        jogosViewController.finishedGames = (mockedMatches.nextMatches, mockedMatches.keys)
+        jogosViewController.nextGames = (mockedMatches.nextMatches, mockedMatches.keys)
+
+        let firstSectionMockedGamesCount = mockedMatches.nextMatches[mockedMatches.keys[0]]?.count
+        let secondsSectionMockedGamesCount = mockedMatches.nextMatches[mockedMatches.keys[1]]?.count
+
+        XCTAssertTrue(jogosViewController.selectedSegmented == 1)
+        XCTAssertTrue(jogosViewController.tableGames.1 == mockedMatches.keys)
+        XCTAssertTrue(jogosViewController.tableGames.0[mockedMatches.keys[0]]?.count == firstSectionMockedGamesCount)
+        XCTAssertTrue(jogosViewController.tableGames.0[mockedMatches.keys[1]]?.count == secondsSectionMockedGamesCount)
+    }
+
+    func test_cell_heigth() {
+
+        let itemHeigth = jogosViewController.tableView(UITableView(), heightForRowAt: IndexPath(item: 1, section: 1))
+
+        XCTAssertTrue(itemHeigth == 180)
+    }
+
+    func test_title_header() {
+
+        jogosViewController.tableGames = (mockedMatches.finishedMatches, mockedMatches.keys)
+
+        guard let firstTitleHeader = jogosViewController.tableView(UITableView(), titleForHeaderInSection: 0) else {
+            XCTAssertTrue(false)
+            return
+        }
+        XCTAssertTrue(firstTitleHeader == mockedMatches.keys[0])
+
+        guard let secondTitleHeader = jogosViewController.tableView(UITableView(), titleForHeaderInSection: 1) else {
+            XCTAssertTrue(false)
+            return
+        }
+        XCTAssertTrue(secondTitleHeader == mockedMatches.keys[1])
+
+    }
+
+    func test_number_of_rows_in_section() {
+
+        jogosViewController.tableGames = (mockedMatches.finishedMatches, mockedMatches.keys)
+
+        let rowsNumberSection0 = jogosViewController.tableView(UITableView(), numberOfRowsInSection: 0)
+
+        XCTAssertTrue(rowsNumberSection0 == mockedMatches.finishedMatches[mockedMatches.keys[0]]?.count)
+
+    }
+
+    func test_number_of_sections() {
+        jogosViewController.tableGames = (mockedMatches.finishedMatches, mockedMatches.keys)
+
+        let numberOfSections = jogosViewController.numberOfSections(in: UITableView())
+
+        XCTAssertTrue(numberOfSections == mockedMatches.keys.count)
     }
 
 }

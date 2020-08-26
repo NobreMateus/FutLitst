@@ -13,10 +13,10 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var tableGames: ([String:[Match]], [String]) = ([:], [])
     var finishedGames: ([String:[Match]], [String]) = ([:], []) {
         didSet {
-            if(gamesSegmentedControl.selectedSegmentIndex == 1) {
-                self.tableGames = self.nextGames
+            if(selectedSegmented == 1) {
+                self.tableGames = self.finishedGames
                 DispatchQueue.main.async {
-                    self.gamesTableView.reloadData()
+                    self.jogosView.gamesTableView.reloadData()
                 }
             }
         }
@@ -24,45 +24,42 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     var nextGames: ([String:[Match]], [String]) = ([:], []) {
         didSet {
-            if(gamesSegmentedControl.selectedSegmentIndex == 0) {
+            if(selectedSegmented == 0) {
                 self.tableGames = self.nextGames
                 DispatchQueue.main.async {
-                    self.gamesTableView.reloadData()
+                    self.jogosView.gamesTableView.reloadData()
                 }
             }
         }
     }
 
-    let gamesSegmentedControl: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl(items: ["Próximos","Terminados"])
-        segmentedControl.selectedSegmentIndex = 0
-        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(segment:)), for:.valueChanged)
-        return segmentedControl
-    }()
-
-    let gamesTableView: UITableView = {
-        let gamesTv = UITableView()
-        return gamesTv
-    }()
-
-    let jogosView = JogosView()
+    var selectedSegmented = 0
 
     let filterMatches = FilterService()
+
+    override func loadView() {
+        let jogosView = JogosView()
+        view = jogosView
+    }
+
+    var jogosView: JogosView {
+        guard let jogosV = view as? JogosView else { return JogosView() }
+        return jogosV
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
         title = "Jogos"
         navigationController?.navigationBar.prefersLargeTitles = true
 
         getMatches()
 
-        addGamesSegmentedControl()
-        addGamesTableView()
+        jogosView.render()
+        jogosView.setSelectedSegment = setSelectedSegment
+        jogosView.gamesTableView.delegate = self
+        jogosView.gamesTableView.dataSource = self
 
-        gamesTableView.delegate = self
-        gamesTableView.dataSource = self
     }
 
     func getMatches() {
@@ -85,35 +82,15 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
 
-    func addGamesSegmentedControl() {
-        view.addSubview(gamesSegmentedControl)
-
-        let safeArea = view.safeAreaLayoutGuide
-
-        gamesSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        gamesSegmentedControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16).isActive = true
-        gamesSegmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16).isActive = true
-        gamesSegmentedControl.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 8).isActive = true
-    }
-
-    func addGamesTableView() {
-        view.addSubview(gamesTableView)
-
-        gamesTableView.translatesAutoresizingMaskIntoConstraints = false
-        gamesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        gamesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        gamesTableView.topAnchor.constraint(equalTo: gamesSegmentedControl.bottomAnchor, constant: 16).isActive = true
-        gamesTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-    }
-
-    @objc
-    func segmentedControlValueChanged(segment: UISegmentedControl) {
-        if segment.selectedSegmentIndex == 0 {
+    func setSelectedSegment(selectedIndex: Int) {
+        if selectedIndex == 0 {
             tableGames = nextGames
-            gamesTableView.reloadData()
+            selectedSegmented = 0
+            jogosView.gamesTableView.reloadData()
         } else {
             tableGames = finishedGames
-            gamesTableView.reloadData()
+            selectedSegmented = 1
+            jogosView.gamesTableView.reloadData()
         }
     }
 }

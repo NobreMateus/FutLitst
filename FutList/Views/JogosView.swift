@@ -10,7 +10,14 @@ import UIKit
 
 class JogosView: UIView {
 
-    //var updateTable: ()->Void?
+    var setSelectedSegment: (Int) -> Void = { _ in }
+
+    func render() {
+        print("Ola Amigos")
+        addGamesSegmentedControl()
+        addGamesTableView()
+        self.backgroundColor = .white
+    }
 
     let gamesSegmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["Próximos","Terminados"])
@@ -23,13 +30,7 @@ class JogosView: UIView {
         let gamesTv = UITableView()
         return gamesTv
     }()
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+
     func addGamesSegmentedControl() {
         self.addSubview(gamesSegmentedControl)
 
@@ -53,13 +54,7 @@ class JogosView: UIView {
 
     @objc
     func segmentedControlValueChanged(segment: UISegmentedControl) {
-//        if segment.selectedSegmentIndex == 0 {
-//            tableGames = nextGames
-//            gamesTableView.reloadData()
-//        } else {
-//            tableGames = finishedGames
-//            gamesTableView.reloadData()
-//        }
+        setSelectedSegment(segment.selectedSegmentIndex)
     }
 
 }
