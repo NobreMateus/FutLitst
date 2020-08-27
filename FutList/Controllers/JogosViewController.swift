@@ -64,21 +64,16 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     func getMatches() {
         let matchsRequest = MatchRequest(leagueId: 1396)
-        matchsRequest.getMatchsFromLeague { [weak self] result in
-            switch result {
-            case .failure(let error):
-                print(error)
-            case .success(let matches):
+        matchsRequest.getMatchsFromLeague { (matches: [Match]) in
 
-                guard let finishedGamesTemp = self?.filterMatches.filterFinishedGames(matches: matches) else {return}
-                guard let nextGamesTemp = self?.filterMatches.filterNextGames(matches: matches) else {return}
+            let finishedGamesTemp = self.filterMatches.filterFinishedGames(matches: matches)
+            let nextGamesTemp = self.filterMatches.filterNextGames(matches: matches)
 
-                guard let nextGamesTuple = self?.filterMatches.separateMatchesByDate(matches: nextGamesTemp) else {return}
-                guard let finishedGamesTuple = self?.filterMatches.separateMatchesByDate(matches: finishedGamesTemp) else {return}
+            let nextGamesTuple = self.filterMatches.separateMatchesByDate(matches: nextGamesTemp)
+            let finishedGamesTuple = self.filterMatches.separateMatchesByDate(matches: finishedGamesTemp)
 
-                self?.nextGames = nextGamesTuple
-                self?.finishedGames = finishedGamesTuple
-            }
+            self.nextGames = nextGamesTuple
+            self.finishedGames = finishedGamesTuple
         }
     }
 

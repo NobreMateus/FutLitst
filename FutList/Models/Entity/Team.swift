@@ -19,7 +19,7 @@ struct Team: Decodable {
     var logo: String
 }
 
-struct Response: Decodable {
+struct TeamResponse: Decodable {
     var api: API
 }
 

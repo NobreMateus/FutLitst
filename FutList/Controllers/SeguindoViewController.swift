@@ -51,16 +51,10 @@ class SeguindoViewController: UIViewController, UITableViewDelegate, UITableView
         statistics = []
         for teamId in teamsFollowed {
             let statisticsRequest = StatisticsRequest(teamId: teamId, leagueId: 1396)
-            statisticsRequest.getTeamStatisticsFromLeague { [weak self] result in
-                switch result {
-                case .failure(let error):
-                    print(error)
-                case .success(let statistic):
-                    self?.statistics.append(statistic)
-                }
+            statisticsRequest.getTeamStatisticsFromLeague { statistic in
+                self.statistics.append(statistic)
             }
         }
-
     }
 
 }

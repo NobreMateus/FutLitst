@@ -82,13 +82,8 @@ extension DescobrirViewController {
         guard let searchBarText = searchBar.text else { return }
         let teamsRequest = TeamsRequest(textSearch: searchBarText )
 
-        teamsRequest.getSearchedTeams { [weak self] result in
-            switch result {
-            case .failure(let error):
-                print(error)
-            case .success(let teams):
-                self?.teamsList = teams
-            }
+        teamsRequest.getSearchedTeams { teamsList in
+            self.teamsList = teamsList
         }
     }
 
