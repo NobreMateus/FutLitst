@@ -19,9 +19,9 @@ struct TeamsRequest {
         self.resourceURL = resourceURL
     }
 
-    func getSearchedTeams(completion: @escaping([Team]) -> Void) {
+    func getSearchedTeams(session: URLSession, completion: @escaping([Team]) -> Void) {
 
-        request.doRequest(resource: resourceURL) { result in
+        request.doRequest(resource: resourceURL, session: session) { result in
             switch result {
             case .success(let teamResponse):
                 completion(teamResponse.api.teams)

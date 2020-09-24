@@ -9,21 +9,21 @@
 
 import Foundation
 
-struct SearchTeamsResponse: Decodable {
+struct SearchTeamsResponse: Codable {
     var teams: [Team]
 }
 
-struct Team: Decodable {
+struct Team: Codable {
     var team_id: Int
     var name: String
     var logo: String
 }
 
-struct TeamResponse: Decodable {
+struct TeamResponse: Codable {
     var api: API
 }
 
-struct API: Decodable {
+struct API: Codable {
     var results: Int
     var teams: [Team]
 }

@@ -82,7 +82,7 @@ extension DescobrirViewController {
         guard let searchBarText = searchBar.text else { return }
         let teamsRequest = TeamsRequest(textSearch: searchBarText )
 
-        teamsRequest.getSearchedTeams { teamsList in
+        teamsRequest.getSearchedTeams(session: URLSession.shared) { teamsList in
             self.teamsList = teamsList
         }
     }

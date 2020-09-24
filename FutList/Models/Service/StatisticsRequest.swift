@@ -20,9 +20,9 @@ struct StatisticsRequest {
         self.resourceURL = resourceURL
     }
 
-    func getTeamStatisticsFromLeague( completion: @escaping (Statistics) -> Void ) {
+    func getTeamStatisticsFromLeague( session: URLSession, completion: @escaping (Statistics) -> Void ) {
 
-        request.doRequest(resource: resourceURL) { result in
+        request.doRequest(resource: resourceURL, session: session) { result in
             switch result {
             case .success(let statistic):
                 completion(statistic.api.statistics)

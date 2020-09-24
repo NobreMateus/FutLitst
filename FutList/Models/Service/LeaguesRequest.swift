@@ -21,7 +21,7 @@ struct LeaguesRequest {
 
     func getTeamLeagues(completion: @escaping([League]) -> Void) {
 
-        request.doRequest(resource: resourceURL, completion: { result in
+        request.doRequest(resource: resourceURL, session: URLSession.shared, completion: { result in
             switch result {
             case .success(let leaguesResponse):
                 completion(leaguesResponse.api.leagues)

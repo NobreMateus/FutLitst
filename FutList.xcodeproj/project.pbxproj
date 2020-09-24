@@ -18,6 +18,9 @@
 		272CA24A24ED4A6100C784CA /* TeamsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272CA24924ED4A6100C784CA /* TeamsRequest.swift */; };
 		273AD85324EABB2D003E3AB5 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 273AD85224EABB2D003E3AB5 /* .swiftlint.yml */; };
 		2747650A24ED6BED006388E8 /* SearchedTeamsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2747650924ED6BED006388E8 /* SearchedTeamsTableViewCell.swift */; };
+		275AA812251CC86E0004CDED /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275AA811251CC86E0004CDED /* URLProtocolMock.swift */; };
+		275AA817251CCAD00004CDED /* NetworkingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275AA816251CCAD00004CDED /* NetworkingTest.swift */; };
+		275AA81C251CDC0C0004CDED /* MockedStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275AA81B251CDC0C0004CDED /* MockedStatistics.swift */; };
 		27CDEA2624F34910008F308E /* TeamPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CDEA2524F34910008F308E /* TeamPersistence.swift */; };
 		27CDEA2824F349DE008F308E /* PersistenceServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CDEA2724F349DE008F308E /* PersistenceServiceTests.swift */; };
 		27D4448924F141A700D7E50B /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D4448824F141A700D7E50B /* Match.swift */; };
@@ -73,6 +76,9 @@
 		272CA24924ED4A6100C784CA /* TeamsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsRequest.swift; sourceTree = "<group>"; };
 		273AD85224EABB2D003E3AB5 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		2747650924ED6BED006388E8 /* SearchedTeamsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedTeamsTableViewCell.swift; sourceTree = "<group>"; };
+		275AA811251CC86E0004CDED /* URLProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolMock.swift; sourceTree = "<group>"; };
+		275AA816251CCAD00004CDED /* NetworkingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTest.swift; sourceTree = "<group>"; };
+		275AA81B251CDC0C0004CDED /* MockedStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedStatistics.swift; sourceTree = "<group>"; };
 		27CDEA2524F34910008F308E /* TeamPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamPersistence.swift; sourceTree = "<group>"; };
 		27CDEA2724F349DE008F308E /* PersistenceServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceServiceTests.swift; sourceTree = "<group>"; };
 		27D4448824F141A700D7E50B /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
@@ -181,6 +187,7 @@
 				27F2DF3824F02A2200C81555 /* StatisticsRequest.swift */,
 				27D4448A24F1456100D7E50B /* MatchRequest.swift */,
 				2713448B24F6C67A0085C130 /* Request.swift */,
+				275AA811251CC86E0004CDED /* URLProtocolMock.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -245,6 +252,8 @@
 				27DF9F3E24F3F85D0089A105 /* GamesViewControllerTests.swift */,
 				27E8DB0724F5300F002C9EE9 /* MatchRequestTests.swift */,
 				27E8DB0E24F5E21B002C9EE9 /* MockedMatches.swift */,
+				275AA816251CCAD00004CDED /* NetworkingTest.swift */,
+				275AA81B251CDC0C0004CDED /* MockedStatistics.swift */,
 			);
 			path = FutListTests;
 			sourceTree = "<group>";
@@ -440,6 +449,7 @@
 				27E8DB1124F6087A002C9EE9 /* DescobrirView.swift in Sources */,
 				27236C1E24F612AF00CAD74E /* SeguindoView.swift in Sources */,
 				27FCA47524E579DB000A4010 /* TabBarViewController.swift in Sources */,
+				275AA812251CC86E0004CDED /* URLProtocolMock.swift in Sources */,
 				272CA24824ED48A000C784CA /* Team.swift in Sources */,
 				27D4448924F141A700D7E50B /* Match.swift in Sources */,
 				2747650A24ED6BED006388E8 /* SearchedTeamsTableViewCell.swift in Sources */,
@@ -473,6 +483,8 @@
 				27E8DB0F24F5E21B002C9EE9 /* MockedMatches.swift in Sources */,
 				27FCA48824E579DD000A4010 /* FutListTests.swift in Sources */,
 				27236C1C24F60FB800CAD74E /* DescobrirViewControllerTests.swift in Sources */,
+				275AA81C251CDC0C0004CDED /* MockedStatistics.swift in Sources */,
+				275AA817251CCAD00004CDED /* NetworkingTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

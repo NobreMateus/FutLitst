@@ -13,13 +13,13 @@ struct Request<T: Decodable> {
     
     let API_KEY = "1af6798dcd3baeedb5836a3518b73c56"
     
-    func doRequest(resource: URL, completion: @escaping (Result<T, RequestError>) -> Void) {
+    func doRequest(resource: URL, session: URLSession, completion: @escaping (Result<T, RequestError>) -> Void) {
 
         var request = URLRequest(url: resource)
         request.httpMethod = "POST"
         request.addValue(self.API_KEY, forHTTPHeaderField: "X-RapidAPI-Key")
 
-        let data = URLSession.shared.dataTask(with: request) { data, _, _ in
+        let data = session.dataTask(with: request) { data, _, _ in
 
             guard let jsonData = data else {
                 completion(.failure(.NoData))

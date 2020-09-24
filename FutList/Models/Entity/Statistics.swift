@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct Statistics: Decodable {
+struct Statistics: Codable {
 
     let matchs: MatchsInfo
     let goals: Goals
 }
 
-struct MatchsInfo: Decodable {
+struct MatchsInfo: Codable {
 
     let matchsPlayed: MatchsResults
     let wins: MatchsResults
@@ -22,25 +22,26 @@ struct MatchsInfo: Decodable {
     let loses: MatchsResults
 }
 
-struct Goals: Decodable {
+struct Goals: Codable, Equatable {
 
     let goalsFor: MatchsResults
     let goalsAgainst: MatchsResults
 }
 
-struct MatchsResults: Decodable {
+struct MatchsResults: Codable, Equatable {
 
     let home: Int
     let away: Int
     let total: Int
 }
 
-struct ApiStatics: Decodable {
+struct ApiStatics: Codable {
 
     let results: Int
     let statistics: Statistics
+
 }
 
-struct StatisticResponse: Decodable {
+struct StatisticResponse: Codable {
     let api: ApiStatics
 }

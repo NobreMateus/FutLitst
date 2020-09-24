@@ -21,7 +21,7 @@ struct MatchRequest {
 
     func getMatchsFromLeague(completion: @escaping ([Match]) -> Void) {
 
-        request.doRequest(resource: self.resourceURL) { result in
+        request.doRequest(resource: self.resourceURL, session: URLSession.shared) { result in
                 
             switch result {
             case .success(let matchResponse):

@@ -51,7 +51,7 @@ class SeguindoViewController: UIViewController, UITableViewDelegate, UITableView
         statistics = []
         for teamId in teamsFollowed {
             let statisticsRequest = StatisticsRequest(teamId: teamId, leagueId: 1396)
-            statisticsRequest.getTeamStatisticsFromLeague { statistic in
+            statisticsRequest.getTeamStatisticsFromLeague(session: URLSession.shared) { statistic in
                 self.statistics.append(statistic)
             }
         }
