@@ -9,14 +9,17 @@ on:
 jobs:
   build:
 
-    runs-on: macos-latest
-
+    runs-on: macOS-latest
+    strategy:
+        matrix:
+          destination: ['platform=iOS Simulator,OS=12.2,name=iPhone X']
     steps:
-    - uses: actions/checkout@v2
-    - name: Build
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Build and Test
       run: | 
         cd FutList
-        swift build -v
-        
-    - name: Run tests
-      run: swift test -v
+        xcodebuild clean test -project Texstyle.xcodeproj -scheme Texstyle -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+        bash <(curl -s https://codecov.io/bash)
+      env: 
+        destination: ${{ matrix.destination }}
