@@ -92,7 +92,7 @@ class FilterServiceTests: XCTestCase {
         
         let separatedMatchesByDateTuple = filter.separateMatchesByDate(matches: filteredCompletedAndCurrentGames)
         
-        XCTAssertTrue(separatedMatchesByDateTuple.1.count == 2)
+        XCTAssertTrue(separatedMatchesByDateTuple.1.count == 4)
         
         XCTAssertNotNil(separatedMatchesByDateTuple.0["08-08-2020"])
         XCTAssertNotNil(separatedMatchesByDateTuple.0["09-08-2020"])
