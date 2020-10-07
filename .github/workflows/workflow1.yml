@@ -1,7 +1,7 @@
 name: Workflow 1
 on:
   pull_request:
-    branches: [Teste-GitHub-Actions]
+    branches: [branch-github-test-2]
 
 jobs:
   teste:
