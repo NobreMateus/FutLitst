@@ -1,0 +1,24 @@
+name: Workflow da Talk
+on: 
+  pull_request:
+    branches: [Github-Actions]
+
+jobs:
+  job1:
+    runs-on: macOS-latest
+    
+    strategy:
+      matrix:
+        destination: ['platform = iOS Simulator, OS = 13.7, name = iPhone 11']
+     
+    steps: 
+       - name: Checkout  
+         uses: actions/checkout@v2
+       
+       - name: Build and Test 
+         run: |
+           xcodebuild clean test -project FutList.xcodeproj -scheme FutList -destination "${destination}"
+           
+         env:
+           destination: ${{matrix.destination}}
+           
