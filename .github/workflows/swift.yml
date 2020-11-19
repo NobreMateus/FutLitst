@@ -16,10 +16,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@master
+    - name: Install Coverage
+      run: |
+        .Package(url:"https://github.com/elegantchaos/Coverage.git", branch:"master")
+        coverage --help
+      
     - name: Build and Test
       run: |
         xcodebuild clean test -project FutList.xcodeproj -scheme FutList -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-        bash <(curl -s https://codecov.io/bash)
         coverage Test.xcresult Coverage --threshold=0.6
       env: 
         destination: ${{ matrix.destination }}
