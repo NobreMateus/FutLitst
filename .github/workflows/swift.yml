@@ -2,9 +2,9 @@ name: Swift
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ master ]
   pull_request:
-    branches: [ develop ]
+    branches: [ master ]
 
 jobs:
   build:
@@ -20,5 +20,6 @@ jobs:
       run: |
         xcodebuild clean test -project FutList.xcodeproj -scheme FutList -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
         bash <(curl -s https://codecov.io/bash)
+        coverage Test.xcresult Coverage --threshold=0.6
       env: 
         destination: ${{ matrix.destination }}
