@@ -7,6 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
+  
   build:
 
     runs-on: macOS-latest
@@ -22,3 +23,13 @@ jobs:
         bash <(curl -s https://codecov.io/bash)
       env: 
         destination: ${{ matrix.destination }}
+   
+  merge_pull:
+    - name: teste
+      conditions:
+        - base=master
+      actions:
+        merge:
+          method: merge
+          
+     
