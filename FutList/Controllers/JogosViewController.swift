@@ -52,6 +52,7 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         title = "Jogos"
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
         getMatches()
 
@@ -101,7 +102,7 @@ extension JogosViewController {
         let gamesCell = GameInfoCell()
 
         guard let gameInfo = tableGames.0[tableGames.1[indexPath.section]]?[indexPath.row] else {return gamesCell}
-        gamesCell.configureCell(gameInfo: gameInfo)
+        gamesCell.configureCell(gameInfo: gameInfo, cellNum: indexPath.item)
         return gamesCell
     }
 
@@ -112,9 +113,31 @@ extension JogosViewController {
     func numberOfSections(in tableView: UITableView) -> Int {
         return tableGames.1.count
     }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return tableGames.1[section]
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        let sectionTitle = UILabel()
+        let dateString = tableGames.1[section]
+        view.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        
+        sectionTitle.textColor = .white
+        view.addSubview(sectionTitle)
+        
+        sectionTitle.translatesAutoresizingMaskIntoConstraints = false
+        sectionTitle.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        sectionTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        
+        view.backgroundColor = .black
+        
+        let dateHandling = DateHandling()
+        
+        guard let dateTitle = dateHandling.formatStringDateToString(inFormatString: "dd-MM-yyyy", outFormatString: "dd/MM/yyyy", dateString: dateString) else {return view}
+        
+        guard let weekDay = dateHandling.dateStringToWeekDay(inFormatString: "dd-MM-yyyy", dateString: dateString) else {return view}
+        
+        sectionTitle.text = "\(dateTitle) - \(weekDay)"
+        
+        return view
     }
 
 }

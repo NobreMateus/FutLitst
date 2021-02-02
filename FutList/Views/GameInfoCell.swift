@@ -12,8 +12,6 @@ class GameInfoCell: UITableViewCell {
 
     let teamsNameView = UIView()
     let teamsSeparator = UILabel()
-    let player1Label = UILabel()
-    let player2Label = UILabel()
     let placar1Label = UILabel()
     let placar2Label = UILabel()
     let estadioLabel = UILabel()
@@ -29,7 +27,7 @@ class GameInfoCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    func configureCell(gameInfo: Match) {
+    func configureCell(gameInfo: Match, cellNum: Int) {
 
         addTeamsAndSeparator(player1Name: gameInfo.homeTeam.team_name, player2Name: gameInfo.awayTeam.team_name)
 
@@ -37,29 +35,42 @@ class GameInfoCell: UITableViewCell {
             addPlacar(placar1: String(homeGoals), placar2: String(awayGoals))
         }
 
-        //addMoreInfoGame(estadio: gameInfo.venue, horario: gameInfo.event_date, yReferenceView: teamsSeparator)
-
+        self.backgroundColor = cellBackgroundColorSelection(cellNum: cellNum)
+    }
+    
+    func cellBackgroundColorSelection(cellNum: Int) -> UIColor {
+        
+        let divisionRest = cellNum % 2
+        
+        if(divisionRest == 1) {
+            return UIColor(red: 0/255, green: 47/255, blue: 13/255, alpha: 1)
+        } else {
+            return UIColor(red: 0/255, green: 65/255, blue: 18/255, alpha: 1)
+        }
     }
 
     func addTeamsAndSeparator(player1Name: String, player2Name: String) {
+        
+        let player1View = teamInfoView(name: player1Name, imagePath: "")
+        let player2View = teamInfoView(name: player2Name, imagePath: "")
 
-        player1Label.text = player1Name
-        player2Label.text = player2Name
         teamsSeparator.text = "X"
 
-        teamsNameView.addSubview(player1Label)
-        teamsNameView.addSubview(player2Label)
+        teamsNameView.addSubview(player1View)
+        teamsNameView.addSubview(player2View)
         teamsNameView.addSubview(teamsSeparator)
         self.addSubview(teamsNameView)
 
-        player1Label.translatesAutoresizingMaskIntoConstraints = false
-        player1Label.trailingAnchor.constraint(equalTo: self.centerXAnchor, constant: -60).isActive = true // Erro de constraint
-        player1Label.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
-
-        player2Label.translatesAutoresizingMaskIntoConstraints = false
-        player2Label.leadingAnchor.constraint(equalTo: self.centerXAnchor, constant: 60).isActive = true
-        player2Label.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
-
+        player1View.translatesAutoresizingMaskIntoConstraints = false
+        player1View.widthAnchor.constraint(equalTo: teamsNameView.widthAnchor, multiplier: 0.35).isActive = true
+        player1View.leadingAnchor.constraint(equalTo: teamsNameView.leadingAnchor, constant: 16).isActive = true
+        player1View.heightAnchor.constraint(equalTo: teamsNameView.heightAnchor).isActive = true
+    
+        player2View.translatesAutoresizingMaskIntoConstraints = false
+        player2View.widthAnchor.constraint(equalTo: teamsNameView.widthAnchor, multiplier: 0.35).isActive = true
+        player2View.trailingAnchor.constraint(equalTo: teamsNameView.trailingAnchor, constant: -16).isActive = true
+        player2View.heightAnchor.constraint(equalTo: teamsNameView.heightAnchor).isActive = true
+        
         teamsSeparator.translatesAutoresizingMaskIntoConstraints = false
         teamsSeparator.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
         teamsSeparator.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
@@ -106,6 +117,34 @@ class GameInfoCell: UITableViewCell {
             estadioLabel.topAnchor.constraint(equalTo: yReferenceView.bottomAnchor, constant: 8).isActive = true
             estadioLabel.centerXAnchor.constraint(equalTo: teamsNameView.centerXAnchor).isActive = true
         }
+    }
+    
+    func teamInfoView(name: String, imagePath: String) -> UIView {
+        
+        let infoView = UIView()
+        let playerName = UILabel()
+        let playerImage = UIImageView()
+        
+        playerName.text = name
+        playerName.numberOfLines = 0
+        playerName.textAlignment = .center
+        playerName.textColor = .white
+        playerImage.backgroundColor = .black
+        
+        infoView.addSubview(playerImage)
+        playerImage.translatesAutoresizingMaskIntoConstraints = false
+        playerImage.centerXAnchor.constraint(equalTo: infoView.centerXAnchor).isActive = true
+        playerImage.topAnchor.constraint(equalTo: infoView.topAnchor, constant: 8).isActive = true
+        playerImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        playerImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        infoView.addSubview(playerName)
+        playerName.translatesAutoresizingMaskIntoConstraints = false
+        playerName.centerXAnchor.constraint(equalTo: infoView.centerXAnchor).isActive = true
+        playerName.topAnchor.constraint(equalTo: playerImage.bottomAnchor, constant: 4).isActive = true
+        playerName.widthAnchor.constraint(equalTo: infoView.widthAnchor, constant: -8).isActive = true
+        
+        return infoView
     }
 
 }

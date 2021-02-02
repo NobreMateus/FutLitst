@@ -12,6 +12,7 @@
 		27236C1C24F60FB800CAD74E /* DescobrirViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27236C1B24F60FB800CAD74E /* DescobrirViewControllerTests.swift */; };
 		27236C1E24F612AF00CAD74E /* SeguindoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27236C1D24F612AF00CAD74E /* SeguindoView.swift */; };
 		27236C2024F6152500CAD74E /* SeguindoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27236C1F24F6152500CAD74E /* SeguindoTableViewCell.swift */; };
+		2728A3D825C9915E00C77A11 /* DateHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2728A3D725C9915E00C77A11 /* DateHandling.swift */; };
 		272B0F5E24F3231A0080F8A4 /* FilterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272B0F5D24F3231A0080F8A4 /* FilterService.swift */; };
 		272B0F6024F325710080F8A4 /* FilterServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272B0F5F24F325710080F8A4 /* FilterServiceTests.swift */; };
 		272CA24824ED48A000C784CA /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272CA24724ED48A000C784CA /* Team.swift */; };
@@ -70,6 +71,7 @@
 		27236C1B24F60FB800CAD74E /* DescobrirViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescobrirViewControllerTests.swift; sourceTree = "<group>"; };
 		27236C1D24F612AF00CAD74E /* SeguindoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeguindoView.swift; sourceTree = "<group>"; };
 		27236C1F24F6152500CAD74E /* SeguindoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeguindoTableViewCell.swift; sourceTree = "<group>"; };
+		2728A3D725C9915E00C77A11 /* DateHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHandling.swift; sourceTree = "<group>"; };
 		272B0F5D24F3231A0080F8A4 /* FilterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterService.swift; sourceTree = "<group>"; };
 		272B0F5F24F325710080F8A4 /* FilterServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterServiceTests.swift; sourceTree = "<group>"; };
 		272CA24724ED48A000C784CA /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
@@ -136,6 +138,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2728A3D625C9914A00C77A11 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				2728A3D725C9915E00C77A11 /* DateHandling.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		2781FEF024EFEBFB00099C3D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +238,7 @@
 		27FCA46F24E579DB000A4010 /* FutList */ = {
 			isa = PBXGroup;
 			children = (
+				2728A3D625C9914A00C77A11 /* utils */,
 				2781FEF024EFEBFB00099C3D /* Controllers */,
 				273AD85224EABB2D003E3AB5 /* .swiftlint.yml */,
 				27FCA47024E579DB000A4010 /* AppDelegate.swift */,
@@ -462,6 +473,7 @@
 				27FCA4A924E6D5FE000A4010 /* GameInfoCell.swift in Sources */,
 				27CDEA2624F34910008F308E /* TeamPersistence.swift in Sources */,
 				27D4448B24F1456100D7E50B /* MatchRequest.swift in Sources */,
+				2728A3D825C9915E00C77A11 /* DateHandling.swift in Sources */,
 				27236C2024F6152500CAD74E /* SeguindoTableViewCell.swift in Sources */,
 				27FCA4A524E57DBF000A4010 /* DescobrirViewController.swift in Sources */,
 				27FCA4A324E57DAA000A4010 /* SeguindoViewController.swift in Sources */,
@@ -644,6 +656,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R39G5DLZJ3;
 				INFOPLIST_FILE = FutList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -662,6 +675,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R39G5DLZJ3;
 				INFOPLIST_FILE = FutList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

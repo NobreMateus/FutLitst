@@ -15,18 +15,24 @@ class JogosView: UIView {
     func render() {
         addGamesSegmentedControl()
         addGamesTableView()
-        self.backgroundColor = .white
+        self.backgroundColor = .black
     }
 
     let gamesSegmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["Próximos","Terminados"])
         segmentedControl.selectedSegmentIndex = 0
+        
+        segmentedControl.backgroundColor = UIColor(red: 28/255, green: 28/255, blue: 30/255, alpha: 1)
+        segmentedControl.selectedSegmentTintColor = UIColor(red: 99/255, green: 99/255, blue: 102/255, alpha: 1)
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        
         segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(segment:)), for:.valueChanged)
         return segmentedControl
     }()
 
     let gamesTableView: UITableView = {
         let gamesTv = UITableView()
+        gamesTv.backgroundColor = .black
         return gamesTv
     }()
 
