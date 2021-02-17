@@ -29,7 +29,7 @@ class GameInfoCell: UITableViewCell {
 
     func configureCell(gameInfo: Match, cellNum: Int) {
 
-        addTeamsAndSeparator(player1Name: gameInfo.homeTeam.team_name, player2Name: gameInfo.awayTeam.team_name)
+        addTeamsAndSeparator(player1Name: gameInfo.homeTeam.team_name, player2Name: gameInfo.awayTeam.team_name, player1Logo: gameInfo.homeTeam.logo, player2Logo: gameInfo.awayTeam.logo)
 
         if let homeGoals = gameInfo.goalsHomeTeam, let awayGoals = gameInfo.goalsAwayTeam {
             addPlacar(placar1: String(homeGoals), placar2: String(awayGoals))
@@ -49,10 +49,10 @@ class GameInfoCell: UITableViewCell {
         }
     }
 
-    func addTeamsAndSeparator(player1Name: String, player2Name: String) {
+    func addTeamsAndSeparator(player1Name: String, player2Name: String, player1Logo: String, player2Logo: String) {
         
-        let player1View = teamInfoView(name: player1Name, imagePath: "")
-        let player2View = teamInfoView(name: player2Name, imagePath: "")
+        let player1View = teamInfoView(name: player1Name, imagePath: player1Logo)
+        let player2View = teamInfoView(name: player2Name, imagePath: player2Logo)
 
         teamsSeparator.text = "X"
 
@@ -86,7 +86,11 @@ class GameInfoCell: UITableViewCell {
 
         placar1Label.text = placar1
         placar2Label.text = placar2
-
+        placar1Label.textColor = .white
+        placar2Label.textColor = .white
+        placar1Label.font = placar1Label.font.withSize(32)
+        placar2Label.font = placar2Label.font.withSize(32)
+        
         teamsNameView.addSubview(placar1Label)
         placar1Label.translatesAutoresizingMaskIntoConstraints = false
         placar1Label.centerYAnchor.constraint(equalTo: teamsNameView.centerYAnchor).isActive = true
@@ -129,14 +133,18 @@ class GameInfoCell: UITableViewCell {
         playerName.numberOfLines = 0
         playerName.textAlignment = .center
         playerName.textColor = .white
-        playerImage.backgroundColor = .black
+        
+        //playerImage.backgroundColor = .black
+        if let imageURL = URL(string: imagePath) {
+            playerImage.load(url: imageURL)
+        }
         
         infoView.addSubview(playerImage)
         playerImage.translatesAutoresizingMaskIntoConstraints = false
         playerImage.centerXAnchor.constraint(equalTo: infoView.centerXAnchor).isActive = true
-        playerImage.topAnchor.constraint(equalTo: infoView.topAnchor, constant: 8).isActive = true
-        playerImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        playerImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        playerImage.topAnchor.constraint(equalTo: infoView.topAnchor, constant: 16).isActive = true
+        playerImage.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        playerImage.heightAnchor.constraint(equalToConstant: 80).isActive = true
         
         infoView.addSubview(playerName)
         playerName.translatesAutoresizingMaskIntoConstraints = false

@@ -10,6 +10,7 @@ import UIKit
 
 class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    let dateHandler = DateHandling()
     var tableGames: ([String:[Match]], [String]) = ([:], [])
     var finishedGames: ([String:[Match]], [String]) = ([:], []) {
         didSet {
@@ -94,14 +95,21 @@ class JogosViewController: UIViewController, UITableViewDelegate, UITableViewDat
 extension JogosViewController {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let gameInfo = tableGames.0[tableGames.1[section]] else {return 0}
+        let sortedDates = self.selectedSegmented==0 ?
+            dateHandler.sortDateStringAsc(dates: tableGames.1):
+            dateHandler.sortDateStringDesc(dates: tableGames.1)
+        
+        guard let gameInfo = tableGames.0[sortedDates[section]] else {return 0}
         return gameInfo.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let gamesCell = GameInfoCell()
-
-        guard let gameInfo = tableGames.0[tableGames.1[indexPath.section]]?[indexPath.row] else {return gamesCell}
+        let sortedDates = self.selectedSegmented==0 ?
+            dateHandler.sortDateStringAsc(dates: tableGames.1):
+            dateHandler.sortDateStringDesc(dates: tableGames.1)
+        
+        guard let gameInfo = tableGames.0[sortedDates[indexPath.section]]?[indexPath.row] else {return gamesCell}
         gamesCell.configureCell(gameInfo: gameInfo, cellNum: indexPath.item)
         return gamesCell
     }
@@ -117,7 +125,11 @@ extension JogosViewController {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
         let sectionTitle = UILabel()
-        let dateString = tableGames.1[section]
+        let sortedDates = self.selectedSegmented==0 ?
+            dateHandler.sortDateStringAsc(dates: tableGames.1):
+            dateHandler.sortDateStringDesc(dates: tableGames.1)
+        
+        let dateString = sortedDates[section]
         view.heightAnchor.constraint(equalToConstant: 36).isActive = true
         
         sectionTitle.textColor = .white
@@ -140,4 +152,18 @@ extension JogosViewController {
         return view
     }
 
+}
+
+extension UIImageView {
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
+    }
 }

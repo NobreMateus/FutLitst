@@ -14,12 +14,13 @@ class TabBarViewController: UITabBarController {
         super.viewDidLoad()
 
         navigationController?.navigationItem.largeTitleDisplayMode = .always
-
-        let seguindoViewController = SeguindoViewController()
+        self.tabBar.barTintColor = .black
+        tabBar.tintColor = UIColor(red: 175/255, green: 82/255, blue: 222/255, alpha: 1)
+        let seguindoViewController = UINavigationController(rootViewController: LiveMatchesViewController()) 
         let jogosViewController =  UINavigationController(rootViewController: JogosViewController())
         let descobrirViewController = DescobrirViewController()
 
-        seguindoViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
+        seguindoViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
         jogosViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .mostRecent, tag: 1)
         descobrirViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 2)
         viewControllers = [seguindoViewController, jogosViewController, descobrirViewController]

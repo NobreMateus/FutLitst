@@ -60,4 +60,42 @@ class DateHandling {
         
         return dateOpt
     }
+    
+    func sortDateStringDesc(dates: [String]) -> [String] {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+
+        var newDates = dates
+        
+        newDates.sort {date1Str, date2Str in
+            let date1Opt = dateFormatter.date(from: date1Str)
+            let date2Opt = dateFormatter.date(from: date2Str)
+            
+            guard let date1 = date1Opt else {return false}
+            guard let date2 = date2Opt else {return false}
+            
+            return date2 < date1
+        }
+        
+        return newDates
+    }
+    
+    func sortDateStringAsc(dates: [String]) -> [String] {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+
+        var newDates = dates
+        
+        newDates.sort {date1Str, date2Str in
+            let date1Opt = dateFormatter.date(from: date1Str)
+            let date2Opt = dateFormatter.date(from: date2Str)
+            
+            guard let date1 = date1Opt else {return false}
+            guard let date2 = date2Opt else {return false}
+            
+            return date2 > date1
+        }
+        
+        return newDates
+    }
 }

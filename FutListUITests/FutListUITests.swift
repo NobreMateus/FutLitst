@@ -26,8 +26,14 @@ class FutListUITests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
-
-        // Use recording to get started writing UI tests.
+        XCTAssertTrue(app.buttons.count == 3)
+        sleep(2)
+        app.buttons["Most Recent"].tap()
+        sleep(3)
+        app.buttons["Terminados"].tap()
+        sleep(2)
+        app.buttons["Search"].tap()
+        sleep(2)
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
